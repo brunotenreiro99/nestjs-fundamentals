@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Coffee } from './entites/coffee.entity';
+import { Coffee } from './entities/flavor.entity.ts/coffee.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCoffeDto } from './dto/create-coffe.dto/create-coffe.dto';
@@ -13,11 +13,20 @@ export class CoffeesService {
   ) {}
 
   findAll(): Promise<Coffee[]> {
-    return this.coffeeRepository.find();
+    return this.coffeeRepository.find({
+      relations: {
+        flavors: true,
+      },
+    });
   }
 
   async findOne(id: string) {
-    const coffee = await this.coffeeRepository.findOne({ where: { id: +id } });
+    const coffee = await this.coffeeRepository.findOne({
+      where: { id: +id },
+      relations: {
+        flavors: true,
+      },
+    });
 
     if (!coffee) {
       throw new NotFoundException(`Coffee #${id} not found`);
