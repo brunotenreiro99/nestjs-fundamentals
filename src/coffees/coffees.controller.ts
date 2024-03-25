@@ -17,6 +17,7 @@ export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
   @Get()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   findAll(@Query() _paginationQuery) {
     // const { limit, offset } = paginationQuery;
     return this.coffeesService.findAll();
