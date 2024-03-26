@@ -13,4 +13,23 @@
 
         Interceptors: make possible to bind extra logic before or after a method exectution, extend a method, handling caching, and other stuff.
 
-        
+        Nest Building Blocks can be at Global, Controller, Method, Param (Pipes Only) level
+
+            Examples:
+
+                @UsePipes(ValidationPipe)
+                export class CoffeesController {}
+
+                export class CoffeesController {
+                    @UsePipes(ValidationPipe)
+                    @Get()
+                    ...
+                }
+
+                (Pipes Only!)
+                export class CoffeesController {
+                    @Get()
+                    get(@Param(ValidationPipe))
+                    getAll(@Query(ValidationPipe))
+                    update(@Body(ValidationPipe))
+                }

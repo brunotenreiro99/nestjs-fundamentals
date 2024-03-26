@@ -7,6 +7,8 @@ import {
   Patch,
   Post,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeDto } from './dto/create-coffe.dto/create-coffe.dto';
@@ -14,6 +16,7 @@ import { UpdateCoffeDto } from './dto/create-coffe.dto/update-coffe.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 
 @Controller('coffees')
+@UsePipes(ValidationPipe)
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
