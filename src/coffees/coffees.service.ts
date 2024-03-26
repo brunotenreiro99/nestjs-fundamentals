@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
+import { Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { Coffee } from './entities/flavor.entity.ts/coffee.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
