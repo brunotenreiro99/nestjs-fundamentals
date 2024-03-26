@@ -13,10 +13,10 @@ import {
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeDto } from './dto/create-coffe.dto/create-coffe.dto';
 import { UpdateCoffeDto } from './dto/create-coffe.dto/update-coffe.dto';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
-import { Public } from 'src/common/decorators/public.decorator';
-import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
-import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto/pagination-query.dto';
+import { Public } from '../common/decorators/public.decorator';
+import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
+import { Protocol } from '../common/decorators/protocol.decorator';
 import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('coffees')
