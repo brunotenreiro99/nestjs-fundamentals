@@ -45,6 +45,7 @@ export class CoffeesService {
   }
 
   async create(createCoffeeDto: CreateCoffeDto) {
+    console.log(createCoffeeDto);
     const flavors = await Promise.all(
       createCoffeeDto.flavors.map((name) => this.preloadFlavorByName(name)),
     );
