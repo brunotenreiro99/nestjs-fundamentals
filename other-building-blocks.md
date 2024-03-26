@@ -150,3 +150,27 @@
                         return val;
                     }
                 }
+
+        Middlewares can be created as functions or classes. A function middleware is stateless, it cannot inject dependencies and dont have access to the nest container. On the other hand, classes do.
+
+            Command: nest g middleware <file>
+
+        We bind middlewares to a PATH, for that we can implement NestModule in a module class such as this example:
+
+            export class CommonModule implements NestModule {
+                configure(consumer: MiddlewareConsumer) {
+                    consumer.apply(LoggingMiddleware).forRoutes('*');
+                }
+            }
+
+            And here we also set the path(s) that will execute the middleware, in this case * makes it execute in all the paths.
+
+            consumer.apply(LoggingMiddleware).forRoutes({ 
+                path: 'coffees', method: RequestMethod.GET
+            });
+
+            In this case instead if will only execute for the GET method of the coffees routes
+
+            consumer.apply(LoggingMiddleware).exclude('coffees').forRoutes('*');
+
+            We can also exclude paths, in this case, we exclude coffees routes to execute the middleware
