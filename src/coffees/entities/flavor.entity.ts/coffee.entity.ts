@@ -19,6 +19,10 @@ export class Coffee {
   brand: string;
 
   @JoinTable()
-  @ManyToMany(() => Flavor, (flavor) => flavor.coffees)
-  flavors: string[];
+  // if we want to add a coffe with a flavor that does not exists, we can use cascading inserts (cascade: true)
+  // by using the comment below we can say that cascade will only works for insert
+  @ManyToMany(() => Flavor, (flavor) => flavor.coffees, {
+    cascade: true, // ['insert']
+  })
+  flavors: Flavor[];
 }
