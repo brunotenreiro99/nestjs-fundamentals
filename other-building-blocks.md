@@ -33,3 +33,7 @@
                     getAll(@Query(ValidationPipe))
                     update(@Body(ValidationPipe))
                 }
+
+        When an exception is not handled by the app, it is handled by the filters. This base handled filter can handle many cases but we could want to have some control on that, for that we can create our own exception filter.
+
+        This can be really helpful for building for example logging systems that can then store in an external service.
