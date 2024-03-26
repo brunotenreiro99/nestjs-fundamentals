@@ -17,3 +17,9 @@
 
             In this case we try to get the DATABASE_HOST but if it is not set, it will return "localhost".
     Custom config files allow us to group related configuration data
+    We can add type safety to our config service
+
+            @Inject(coffeesConfig.KEY)
+            private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>
+
+            In the constructor, by writing the code above, the variable is going to be type safe and allow us to select the corresponding values easier
