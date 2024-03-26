@@ -151,26 +151,45 @@
                     }
                 }
 
-        Middlewares can be created as functions or classes. A function middleware is stateless, it cannot inject dependencies and dont have access to the nest container. On the other hand, classes do.
+    Middlewares can be created as functions or classes. A function middleware is stateless, it cannot inject dependencies and dont have access to the nest container. On the other hand, classes do.
 
-            Command: nest g middleware <file>
+        Command: nest g middleware <file>
 
-        We bind middlewares to a PATH, for that we can implement NestModule in a module class such as this example:
+    We bind middlewares to a PATH, for that we can implement NestModule in a module class such as this example:
 
-            export class CommonModule implements NestModule {
-                configure(consumer: MiddlewareConsumer) {
-                    consumer.apply(LoggingMiddleware).forRoutes('*');
-                }
+        export class CommonModule implements NestModule {
+            configure(consumer: MiddlewareConsumer) {
+                consumer.apply(LoggingMiddleware).forRoutes('*');
             }
+        }
 
-            And here we also set the path(s) that will execute the middleware, in this case * makes it execute in all the paths.
+        And here we also set the path(s) that will execute the middleware, in this case * makes it execute in all the paths.
 
-            consumer.apply(LoggingMiddleware).forRoutes({ 
-                path: 'coffees', method: RequestMethod.GET
-            });
+        consumer.apply(LoggingMiddleware).forRoutes({ 
+            path: 'coffees', method: RequestMethod.GET
+        });
 
-            In this case instead if will only execute for the GET method of the coffees routes
+        In this case instead if will only execute for the GET method of the coffees routes
 
-            consumer.apply(LoggingMiddleware).exclude('coffees').forRoutes('*');
+        consumer.apply(LoggingMiddleware).exclude('coffees').forRoutes('*');
 
-            We can also exclude paths, in this case, we exclude coffees routes to execute the middleware
+        We can also exclude paths, in this case, we exclude coffees routes to execute the middleware
+
+    Decorators:
+
+        NestJS is built around decorators. This are functions that apply logic. We can create custom decorators! Let's imagine we want to get all the request protocol from the route.
+        Normally we would have to use @Req, but this would make everything all to test and harder to read so we can make a custom decorator for that.
+
+        Example:
+
+            export const Protocol = createParamDecorator(
+                (data: unknown, ctx: ExecutionContext) => {
+                    const request = ctx.switchToHttp().getRequest();
+                    return request.protocol;
+                },
+            );
+
+            This decorator, extracts protocol from the request so we don't have to manage with all the rest of the stuff inside the request and only manage the protocol.
+
+        We can also pass parameters to our decorators. For example a default value, then we can access it inside the decorator from the data: unknown parameter by also type safeing it to for example defaultValue: string if our default value we want to send it a string.
+    
