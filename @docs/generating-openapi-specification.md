@@ -51,3 +51,14 @@
 
             @ApiResponse({ status: 403, description: 'Forbidden.' })
             ...
+
+    With Tags we can group and organize related sets of endpoints togther. Making it much easier to navigate in Swagger UI.
+
+        For this we need to use ApiTags decorator on the controller giving it a name for the group.
+
+        @ApiTags('coffees') <---- 
+        @Controller('coffees')
+        @UsePipes(ValidationPipe)
+        export class CoffeesController {
+            ...
+        }

@@ -17,8 +17,9 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/paginati
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
-import { ApiForbiddenResponse } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees')
 @Controller('coffees')
 @UsePipes(ValidationPipe)
 export class CoffeesController {
