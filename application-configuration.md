@@ -16,3 +16,4 @@
             );
 
             In this case we try to get the DATABASE_HOST but if it is not set, it will return "localhost".
+    Custom config files allow us to group related configuration data
