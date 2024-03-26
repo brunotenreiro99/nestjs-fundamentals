@@ -54,3 +54,47 @@
             }
 
             The code above would allow any request to access the route
+        
+        Detect if a endpoint is public or not. For this we can use custom metadata, by using setMetadata decorator, this requests two parameters, the key and metadata value:
+
+            Example: @setMetadata('key', 'value')
+                     @SetMetadata('isPublic', true)
+
+            We can also create our own decorator to set a metadata and make it better
+
+            Example:
+
+                import { SetMetadata } from '@nestjs/common';
+                export const IS_PUBLIC_KEY = 'isPublic';
+                export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
+
+                Usage:
+
+                    @Public()
+                    @Get()
+                    ...
+
+            To get the metadata we can use the Reflector class of nestjs core.
+
+                Example: const isPublic = this.reflector.get(IS_PUBLIC_KEY, context.getHandler());
+
+                    The first method is the key of the metadata and the second argument is the target object context. If we want to get the metadata from a method, we use getHandler, instead if the metadata is at the class level, we use getClass() etc
+
+            Since we added dependencies injection in the constructor of the api key guard, the global guard will not work anymore. When we have dependencies we need to instancate at the module level!
+
+                Removed: 
+                    
+                    app.useGlobalGuards(new ApiKeyGuard());
+
+                Added:
+
+                    @Module({
+                        imports: [ConfigModule],
+                        providers: [
+                            {
+                            provide: APP_GUARD,
+                            useClass: ApiKeyGuard,
+                            },
+                        ],
+                    })
+                    export class CommonModule {}

@@ -14,12 +14,14 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeDto } from './dto/create-coffe.dto/create-coffe.dto';
 import { UpdateCoffeDto } from './dto/create-coffe.dto/update-coffe.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('coffees')
 @UsePipes(ValidationPipe)
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
+  @Public()
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     return this.coffeesService.findAll(paginationQuery);
