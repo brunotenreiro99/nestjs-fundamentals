@@ -38,3 +38,16 @@
             @IsString()
             readonly name: string;
         }
+
+    OpenAPI Specification, allows us to specify a response, the CLI Plugin can automatically define a single successeful response based on the types. But we can define other responses for example in the case of error. For this we can use the ApiResponse Decorator on top of our http methods.
+
+        Example: 
+
+            @ApiForbiddenResponse({ description: 'Forbidden.' })
+            @Get()
+            ...
+
+            -
+
+            @ApiResponse({ status: 403, description: 'Forbidden.' })
+            ...
