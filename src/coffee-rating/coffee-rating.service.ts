@@ -31,6 +31,10 @@ import { CoffeesService } from 'src/coffees/coffees.service';
     that means it get deleted and instanceted each time its called
     Example of usage: scope: Scope.REQUEST
 
+    ----
+
+    The scope is chanined to all the childs that means if the most outer one is a REQUEST scope, the other providers will also be REQUEST
+
  */
 export class CoffeeRatingService {
   constructor(private readonly coffeesService: CoffeesService) {}
