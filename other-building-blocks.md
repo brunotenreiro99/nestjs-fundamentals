@@ -98,3 +98,30 @@
                         ],
                     })
                     export class CommonModule {}
+
+        Interceptors are inspired to Aspect Oriented Technic. These add additional funcionalities to a code.
+
+            Command: nest g interceptor <file>
+
+            Some usage of an interceptor could be to wrap a response to a certain format for example, having wrap it to:
+
+                error: false,
+                data: { ...data }
+
+                Code example:
+
+                    import {
+                        CallHandler,
+                        ExecutionContext,
+                        Injectable,
+                        NestInterceptor,
+                    } from '@nestjs/common';
+                    import { Observable, map } from 'rxjs';
+
+                    @Injectable()
+                    export class WrapResponseInterceptor implements NestInterceptor {
+                        intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+                            console.log('Before');
+                            return next.handle().pipe(map((data) => ({ data })));
+                        }
+                    }
