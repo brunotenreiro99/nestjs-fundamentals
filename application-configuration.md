@@ -23,3 +23,5 @@
             private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>
 
             In the constructor, by writing the code above, the variable is going to be type safe and allow us to select the corresponding values easier
+    The order matters when importing files, to fix this, we can use async instead of forRoot,
+    this allow us for example to import first the database module that askes for env values and after that the config module that has the values for the envs
