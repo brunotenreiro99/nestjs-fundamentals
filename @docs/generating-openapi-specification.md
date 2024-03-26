@@ -30,3 +30,11 @@
 
         From: import { PartialType } from '@nestjs/mapped-types';
         To: import { PartialType } from '@nestjs/swagger';
+
+    To make our Dto even more descriptive, we can use the ApiProprety Decorator:
+
+        export class CreateCoffeDto {
+            @ApiProperty({ description: 'The name of a coffee.' })
+            @IsString()
+            readonly name: string;
+        }
