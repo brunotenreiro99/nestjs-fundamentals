@@ -125,3 +125,28 @@
                             return next.handle().pipe(map((data) => ({ data })));
                         }
                     }
+
+        Pipes have two main responsabilities, transformation and validation. In both cases, they operate just before a method is invoked. Any transformation or validation takes place at this time.
+
+        Nest has several pipes out of the box, such has parse pipes and validation pipe.
+
+        We can also create custom pipes!
+
+            Example of a custom pipes (yes it already exists by default):
+
+                @Injectable()
+                export class ParseIntPipe implements PipeTransform {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    transform(value: string, _: ArgumentMetadata) {
+                        const val = parseInt(value);
+                        console.log(value);
+
+                        if (isNaN(val)) {
+                        throw new BadRequestException(
+                            `Validation failed. "${value}" is not an integer.`,
+                        );
+                        }
+
+                        return val;
+                    }
+                }
