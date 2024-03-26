@@ -18,6 +18,9 @@ export class Coffee {
   @Column()
   brand: string;
 
+  @Column({ default: 0 })
+  recommendations: number;
+
   @JoinTable()
   // if we want to add a coffe with a flavor that does not exists, we can use cascading inserts (cascade: true)
   // by using the comment below we can say that cascade will only works for insert
