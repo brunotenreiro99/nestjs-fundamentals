@@ -14,3 +14,5 @@
         });
 
     By importing the AppModule we are inizializaiting the full project. Its better to do it by moduels and not all in one.
+
+    Any configuration added in the main.ts needs to be applied also in the e2e inizialiation code, otherwise, it will not work as the real one! This means we need to add for example global pipes.
