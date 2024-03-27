@@ -11,7 +11,7 @@ export class Event extends mongoose.Document {
   @Prop()
   type: string;
 
-  @Prop()
+  @Prop({ index: true })
   name: string;
 
   @Prop(mongoose.SchemaTypes.Mixed)
@@ -19,3 +19,4 @@ export class Event extends mongoose.Document {
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);
+EventSchema.index({ name: 1, type: -1 }); // combinaed index, ordered ascending by name and descending by type
