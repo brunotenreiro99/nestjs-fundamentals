@@ -6,10 +6,17 @@ import {
   Coffee,
   CoffeeSchema,
 } from './entities/flavor.entity.ts/coffee.entity';
+import {
+  Event,
+  EventSchema,
+} from 'src/events/entities/event.entity/event.entity';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Coffee.name, schema: CoffeeSchema }]),
+    MongooseModule.forFeature([
+      { name: Coffee.name, schema: CoffeeSchema },
+      { name: Event.name, schema: EventSchema },
+    ]),
   ],
   controllers: [CoffeesController],
   providers: [CoffeesService],
